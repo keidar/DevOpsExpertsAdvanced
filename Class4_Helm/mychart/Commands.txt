@@ -1,0 +1,8 @@
+
+helm create mychart 
+helm template ./ --debug
+helm install mychart ./
+
+#pushing helm chart to chartmuseum:
+helm package .
+curl --data-binary "@mychart-0.1.0.tgz" http://localhost:80/api/charts
