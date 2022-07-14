@@ -1,0 +1,3 @@
+  
+  RabbitMQ Monitor helm install rabbitmq bitnami/rabbitmq --set metrics.enable=true
+  kubectl create clusterrolebinding default --clusterrole cluster-admin --serviceaccount=default:default
