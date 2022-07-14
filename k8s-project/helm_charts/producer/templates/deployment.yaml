@@ -29,13 +29,21 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
+          args: [
+            "python",
+            "producer.py",
+            "--port=5672",
+            "--server=rabbitmq",
+            "--message='Hello'",
+            "--repeat=30"
+          ]
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 5672
               protocol: TCP
           livenessProbe:
             httpGet:
