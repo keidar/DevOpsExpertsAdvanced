@@ -22,8 +22,6 @@ pipeline {
         			git branch: 'master', changelog: false, poll: false, url: 'https://github.com/keidar/DevOpsExpertsAdvanced.git'
           container('helm'){
             script{
-              sh 'ls -ltr '
-              sh 'helm version'
               dir("k8s-project/helm_charts"){
                   sh " helm upgrade --install producer producer"
                   sh " helm upgrade --install consumer consumer"
